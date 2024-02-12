@@ -6,3 +6,66 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  password String
+  name String
+  role ROLE
+  orders Order[]
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
+
+model product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String[]
+  images String[]
+  colors Color[]
+  price Int
+  company String
+  new Boolean
+  onBanner Boolean
+  salePrice Int
+  bannerText String?
+  cta String?
+}
+
+model Color {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  productId String @db.ObjectId
+  product product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  color String @unique
+  name String
+}
+
+type Cart {
+  items Items[]
+  totalPrice Int
+  totalQty Int
+}
+
+type Items {
+  Qty Int
+  productId String
+}
+
+model Order {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  orderById String @db.ObjectId
+  orderBy User @relation(fields: [orderById], references: [id], onDelete: Cascade)
+  totalPrice Int
+  totalQty Int
+  cart Cart
+  method String
+  cardNumber Int?
+  cvv Int?
+  nameOfCard String?
+  expiry String
+  // add google pay stuff here
+}
