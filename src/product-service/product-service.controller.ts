@@ -1,4 +1,4 @@
-import { Controller, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma-service/prisma-service.service';
 import { product } from '@prisma/client';
 
@@ -73,6 +73,7 @@ export class ProductServiceController {
       bannerText,
       cta,
       isNew,
+      categoryId,
     } = data;
 
     if (
@@ -86,7 +87,8 @@ export class ProductServiceController {
       onBanner === undefined ||
       onBanner === null ||
       isNew === undefined ||
-      isNew === null
+      isNew === null ||
+      !categoryId
     ) {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
     }
@@ -110,6 +112,7 @@ export class ProductServiceController {
         onBanner: onBanner,
         bannerText: onBanner ? bannerText : undefined,
         company: company,
+        categoryId: categoryId,
       },
     });
 
@@ -132,6 +135,7 @@ export class ProductServiceController {
       bannerText,
       cta,
       isNew,
+      categoryId,
     } = data;
 
     if (
@@ -145,7 +149,8 @@ export class ProductServiceController {
       onBanner === undefined ||
       onBanner === null ||
       isNew === undefined ||
-      isNew === null
+      isNew === null ||
+      !categoryId
     ) {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
     }
@@ -170,6 +175,7 @@ export class ProductServiceController {
         onBanner: onBanner,
         bannerText: onBanner ? bannerText : undefined,
         company: company,
+        categoryId: categoryId,
       },
     });
 

@@ -40,11 +40,17 @@ export class ProductsController {
     @Query('price') price: number,
     @Query('company') company: string,
     @Query('color') colorId: string,
+    @Query('category') categoryId: string,
   ) {
     let query = {};
 
     if (price) {
-      query = { ...query, price: price };
+      query = {
+        ...query,
+        price: {
+          lte: price,
+        },
+      };
     }
     if (company) {
       query = { ...query, company: company };
@@ -57,6 +63,12 @@ export class ProductsController {
             id: colorId,
           },
         },
+      };
+    }
+    if (categoryId) {
+      query = {
+        ...query,
+        categoryId: categoryId,
       };
     }
     return await this.productService.getQueryProducts(query);

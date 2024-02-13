@@ -34,6 +34,8 @@ model product {
   salePrice Int
   bannerText String?
   cta String?
+  categoryId String @db.ObjectId
+  category category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Color {
@@ -68,4 +70,11 @@ model Order {
   nameOfCard String?
   expiry String
   // add google pay stuff here
+}
+
+model category {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  image String
+  products product[]
 }
