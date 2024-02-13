@@ -7,12 +7,12 @@ export class AuthController {
   constructor(private userService: UserService) {}
   @Get('/:id')
   async getUserWithId(@Param('id') id): Promise<User> {
-    return this.userService.getUserWithId(id);
+    return await this.userService.getUserWithId(id);
   }
 
   @Get('/email/:email')
   async getUserWithEmail(@Param('email') email): Promise<User> {
-    return this.userService.getUserWithEmail(email);
+    return await this.userService.getUserWithEmail(email);
   }
 
   @Post('/signUp')
