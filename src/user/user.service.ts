@@ -35,6 +35,12 @@ export class UserService {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
     }
 
+    const userF = await this.getUserWithEmail(email);
+
+    if (userF) {
+      throw new HttpException('user found with email', HttpStatus.FOUND);
+    }
+
     const hashPassword: string = bcrypt.hashSync(password, 12);
 
     const user: User = await this.prisma.user.create({
