@@ -12,7 +12,18 @@ import { ColorService } from './color/color.service';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true })],
-  controllers: [AppController, AuthController, ProductsController, ColorController],
-  providers: [AppService, PrismaService, UserService, ProductServiceController, ColorService],
+  controllers: [
+    AppController,
+    AuthController,
+    ProductsController,
+    ColorController,
+  ],
+  providers: [
+    AppService,
+    PrismaService,
+    UserService,
+    ProductServiceController,
+    ColorService,
+  ],
 })
 export class AppModule {}

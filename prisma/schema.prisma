@@ -8,12 +8,12 @@ datasource db {
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  email    String  @unique
   password String
-  name String
-  role ROLE
-  orders Order[]
+  name     String
+  role     ROLE
+  orders   Order[]
 }
 
 enum ROLE {
@@ -22,59 +22,58 @@ enum ROLE {
 }
 
 model product {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
   description String[]
-  images String[]
-  colors Color[]
-  price Int
-  company String
-  new Boolean
-  onBanner Boolean
-  salePrice Int
-  bannerText String?
-  cta String?
-  categoryId String @db.ObjectId
-  category category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  images      String[]
+  colors      Color[]
+  price       Int
+  company     String
+  new         Boolean
+  onBanner    Boolean
+  bannerText  String?
+  cta         String?
+  categoryId  String   @db.ObjectId
+  category    category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Color {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  productId String @db.ObjectId
-  product product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  color String @unique
-  name String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  color     String   @unique
+  name      String
+  product   product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
 }
 
 type Cart {
-  items Items[]
+  items      Items[]
   totalPrice Int
-  totalQty Int
+  totalQty   Int
 }
 
 type Items {
-  Qty Int
+  Qty       Int
   productId String
 }
 
 model Order {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  orderById String @db.ObjectId
-  orderBy User @relation(fields: [orderById], references: [id], onDelete: Cascade)
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderById  String  @db.ObjectId
+  orderBy    User    @relation(fields: [orderById], references: [id], onDelete: Cascade)
   totalPrice Int
-  totalQty Int
-  cart Cart
-  method String
+  totalQty   Int
+  cart       Cart
+  method     String
   cardNumber Int?
-  cvv Int?
+  cvv        Int?
   nameOfCard String?
-  expiry String
+  expiry     String
   // add google pay stuff here
 }
 
 model category {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  image String
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  image    String
   products product[]
 }

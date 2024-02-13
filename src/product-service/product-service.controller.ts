@@ -64,7 +64,6 @@ export class ProductServiceController {
     const {
       name,
       description,
-      salePrice,
       price,
       images,
       colors,
@@ -79,7 +78,6 @@ export class ProductServiceController {
     if (
       !name ||
       !description ||
-      !salePrice ||
       !price ||
       images.length <= 0 ||
       colors.length <= 0 ||
@@ -102,7 +100,6 @@ export class ProductServiceController {
         new: isNew,
         name: name,
         description: description,
-        salePrice: salePrice,
         price: price,
         images: images,
         colors: {
@@ -126,7 +123,6 @@ export class ProductServiceController {
     const {
       name,
       description,
-      salePrice,
       price,
       images,
       colors,
@@ -141,7 +137,6 @@ export class ProductServiceController {
     if (
       !name ||
       !description ||
-      !salePrice ||
       !price ||
       images.length <= 0 ||
       colors.length <= 0 ||
@@ -167,7 +162,6 @@ export class ProductServiceController {
         new: isNew,
         name: name,
         description: description,
-        salePrice: salePrice,
         price: price,
         images: images,
         colors: colors,
