@@ -11,6 +11,8 @@ import { ColorController } from './color/color.controller';
 import { ColorService } from './color/color.service';
 import { CategoryController } from './category/category.controller';
 import { CategoryService } from './category/category.service';
+import { OrderController } from './order/order.controller';
+import { OrderService } from './order/order.service';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true })],
@@ -20,6 +22,7 @@ import { CategoryService } from './category/category.service';
     ProductsController,
     ColorController,
     CategoryController,
+    OrderController,
   ],
   providers: [
     AppService,
@@ -28,6 +31,7 @@ import { CategoryService } from './category/category.service';
     ProductServiceController,
     ColorService,
     CategoryService,
+    OrderService,
   ],
 })
 export class AppModule {}

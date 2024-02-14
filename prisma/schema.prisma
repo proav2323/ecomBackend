@@ -65,10 +65,18 @@ model Order {
   cart       Cart
   method     String
   cardNumber Int?
-  cvv        Int?
+  cvv        String?
   nameOfCard String?
   expiry     String
+  status Status
   // add google pay stuff here
+}
+
+enum Status {
+  ORDERED
+  SHIPPED
+  OUTONDELIVERY
+  DELIVERED
 }
 
 model category {
