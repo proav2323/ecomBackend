@@ -8,32 +8,32 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { ColorService } from './color.service';
+import { CategoryService } from './category.service';
 import { AdminGuard } from '../admin/admin.guard';
 
-@Controller('color')
-export class ColorController {
-  constructor(private colorService: ColorService) {}
+@Controller('category')
+export class CategoryController {
+  constructor(private categoryService: CategoryService) {}
 
   @Get('/')
   async getAll() {
-    return await this.colorService.getAllColors();
+    return await this.categoryService.getAllCategory();
   }
   @UseGuards(AdminGuard)
   @Post('/add')
   async addColor(@Body() data) {
-    return await this.colorService.addColor(data);
+    return await this.categoryService.addCategory(data);
   }
 
   @UseGuards(AdminGuard)
   @Put('/update/:id')
   async updateColor(@Body() data, @Param('id') id: string) {
-    return await this.colorService.updateProduct(data, id);
+    return await this.categoryService.updateCategory(data, id);
   }
 
   @UseGuards(AdminGuard)
   @Delete('/delete/:id')
   async DeleteColor(@Param('id') id: string) {
-    return await this.colorService.deleteProduct(id);
+    return await this.categoryService.deleteCategory(id);
   }
 }

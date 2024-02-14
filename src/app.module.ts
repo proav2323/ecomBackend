@@ -9,6 +9,8 @@ import { ProductServiceController } from './product-service/product-service.cont
 import { ConfigModule } from '@nestjs/config';
 import { ColorController } from './color/color.controller';
 import { ColorService } from './color/color.service';
+import { CategoryController } from './category/category.controller';
+import { CategoryService } from './category/category.service';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true })],
@@ -17,6 +19,7 @@ import { ColorService } from './color/color.service';
     AuthController,
     ProductsController,
     ColorController,
+    CategoryController,
   ],
   providers: [
     AppService,
@@ -24,6 +27,7 @@ import { ColorService } from './color/color.service';
     UserService,
     ProductServiceController,
     ColorService,
+    CategoryService,
   ],
 })
 export class AppModule {}
