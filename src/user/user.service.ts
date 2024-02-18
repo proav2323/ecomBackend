@@ -4,12 +4,14 @@ import { ROLE, User } from '@prisma/client';
 import * as jsonwebtoken from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     private prisma: PrismaService,
     private configService: ConfigService,
+    private jwtService: JwtService,
   ) {}
   async getUserWithId(id: any): Promise<User> {
     const user = await this.prisma.user.findUnique({
@@ -28,7 +30,7 @@ export class UserService {
     });
     return user ? user : undefined;
   }
-  async signUp(body: any): Promise<string> {
+  async signUp(body: any): Promise<{ token: string }> {
     const { email, password, name } = body;
 
     if (!email || !password || !name) {
@@ -52,13 +54,15 @@ export class UserService {
       },
     });
 
-    return jsonwebtoken.sign(
-      { email: email, id: user.id },
-      this.configService.get('SECRET'),
-    );
+    return {
+      token: jsonwebtoken.sign(
+        { email: email, id: user.id },
+        this.configService.get('SECRET'),
+      ),
+    };
   }
 
-  async login(body: any): Promise<string> {
+  async login(body: any): Promise<{ token: string }> {
     const { email, password } = body;
 
     if (!email || !password) {
@@ -77,10 +81,12 @@ export class UserService {
       throw new HttpException('wrong password', HttpStatus.BAD_REQUEST);
     }
 
-    return jsonwebtoken.sign(
-      { email: email, id: user.id },
-      this.configService.get('SECRET'),
-    );
+    return {
+      token: jsonwebtoken.sign(
+        { email: email, id: user.id },
+        this.configService.get('SECRET'),
+      ),
+    };
   }
   async decodeToken(token: string) {
     const value = jsonwebtoken.decode(token);

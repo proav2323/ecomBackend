@@ -13,9 +13,17 @@ import { CategoryController } from './category/category.controller';
 import { CategoryService } from './category/category.service';
 import { OrderController } from './order/order.controller';
 import { OrderService } from './order/order.service';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true })],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    JwtModule.register({
+      global: true,
+      secret: 'THISSOMTHING',
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
   controllers: [
     AppController,
     AuthController,
