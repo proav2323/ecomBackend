@@ -9,6 +9,14 @@ export class ProductServiceController {
     const products = await this.prsima.product.findMany();
     return products.length >= 1 ? products : [];
   }
+  async getProductsWithId(id: string): Promise<product> {
+    const products = await this.prsima.product.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return products;
+  }
 
   async getFeaturedProducts(): Promise<product[]> {
     const products = await this.prsima.product.findMany({
@@ -73,6 +81,7 @@ export class ProductServiceController {
       cta,
       isNew,
       categoryId,
+      stock,
     } = data;
 
     if (
@@ -86,7 +95,8 @@ export class ProductServiceController {
       onBanner === null ||
       isNew === undefined ||
       isNew === null ||
-      !categoryId
+      !categoryId ||
+      !stock
     ) {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
     }
@@ -110,6 +120,7 @@ export class ProductServiceController {
         bannerText: onBanner ? bannerText : undefined,
         company: company,
         categoryId: categoryId,
+        stock: stock,
       },
     });
 
@@ -132,6 +143,7 @@ export class ProductServiceController {
       cta,
       isNew,
       categoryId,
+      stock,
     } = data;
 
     if (
@@ -145,7 +157,8 @@ export class ProductServiceController {
       onBanner === null ||
       isNew === undefined ||
       isNew === null ||
-      !categoryId
+      !categoryId ||
+      !stock
     ) {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
     }
@@ -170,6 +183,7 @@ export class ProductServiceController {
         bannerText: onBanner ? bannerText : undefined,
         company: company,
         categoryId: categoryId,
+        stock: stock,
       },
     });
 

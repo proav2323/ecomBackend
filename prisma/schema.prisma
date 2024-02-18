@@ -33,6 +33,7 @@ model product {
   onBanner    Boolean
   bannerText  String?
   cta         String?
+  stock Int
   categoryId  String   @db.ObjectId
   category    category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
@@ -69,6 +70,7 @@ model Order {
   nameOfCard String?
   expiry     String
   status Status
+  orderAt DateTime @default(now())
   // add google pay stuff here
 }
 

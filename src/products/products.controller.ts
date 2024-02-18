@@ -20,6 +20,11 @@ export class ProductsController {
     return await this.productService.getAllProducts();
   }
 
+  @Get('/product/:id')
+  async getproducst(@Param() id: string) {
+    return await this.productService.getProductsWithId(id);
+  }
+
   @Get('/featured')
   async getFeatured() {
     return await this.productService.getFeaturedProducts();
