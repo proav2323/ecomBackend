@@ -82,4 +82,9 @@ export class UserService {
       this.configService.get('SECRET'),
     );
   }
+  async decodeToken(token: string) {
+    const value = jsonwebtoken.decode(token);
+
+    return value;
+  }
 }

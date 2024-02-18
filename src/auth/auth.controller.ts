@@ -24,4 +24,9 @@ export class AuthController {
   async login(@Body() data) {
     return this.userService.login(data);
   }
+
+  @Get('/decode/:token')
+  decodeToekn(@Param('token') token: string) {
+    return this.userService.decodeToken(token);
+  }
 }
