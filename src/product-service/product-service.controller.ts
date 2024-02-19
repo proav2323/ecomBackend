@@ -35,6 +35,11 @@ export class ProductServiceController {
       include: {
         colors: true,
         category: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return products.length >= 1 ? products : [];
@@ -48,6 +53,11 @@ export class ProductServiceController {
       include: {
         colors: true,
         category: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return products.length >= 1 ? products : [];
@@ -59,6 +69,11 @@ export class ProductServiceController {
       include: {
         colors: true,
         category: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return products.length >= 1 ? products : [];
@@ -88,6 +103,11 @@ export class ProductServiceController {
       include: {
         colors: true,
         category: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return products.length >= 1 ? products : [];
