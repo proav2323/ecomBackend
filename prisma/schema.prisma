@@ -14,6 +14,7 @@ model User {
   name     String
   role     ROLE
   orders   Order[]
+  reviews  reviews[]
 }
 
 enum ROLE {
@@ -27,6 +28,7 @@ model product {
   description String
   images      String[]
   colors      Color[]
+  reviews reviews[]
   price       Int
   company     String
   new         Boolean
@@ -87,4 +89,14 @@ model category {
   name     String
   image    String
   products product[]
+}
+
+model reviews {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment String
+  stars Int
+  productId String @db.ObjectId
+  product product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
