@@ -55,6 +55,7 @@ type Cart {
 type Items {
   Qty       Int
   productId String
+  colorId String
 }
 
 model Order {
