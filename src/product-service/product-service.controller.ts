@@ -6,13 +6,22 @@ import { product } from '@prisma/client';
 export class ProductServiceController {
   constructor(private prsima: PrismaService) {}
   async getAllProducts(): Promise<product[]> {
-    const products = await this.prsima.product.findMany();
+    const products = await this.prsima.product.findMany({
+      include: {
+        colors: true,
+        category: true,
+      },
+    });
     return products.length >= 1 ? products : [];
   }
   async getProductsWithId(id: string): Promise<product> {
     const products = await this.prsima.product.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        colors: true,
+        category: true,
       },
     });
     return products;
@@ -23,6 +32,10 @@ export class ProductServiceController {
       where: {
         onBanner: true,
       },
+      include: {
+        colors: true,
+        category: true,
+      },
     });
     return products.length >= 1 ? products : [];
   }
@@ -32,6 +45,10 @@ export class ProductServiceController {
       where: {
         new: true,
       },
+      include: {
+        colors: true,
+        category: true,
+      },
     });
     return products.length >= 1 ? products : [];
   }
@@ -39,6 +56,10 @@ export class ProductServiceController {
   async getQueryProducts(query: any): Promise<product[]> {
     const products = await this.prsima.product.findMany({
       where: query,
+      include: {
+        colors: true,
+        category: true,
+      },
     });
     return products.length >= 1 ? products : [];
   }
@@ -60,6 +81,10 @@ export class ProductServiceController {
             cta: { contains: query, mode: 'insensitive' },
           },
         ],
+      },
+      include: {
+        colors: true,
+        category: true,
       },
     });
     return products.length >= 1 ? products : [];
