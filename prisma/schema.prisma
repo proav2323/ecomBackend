@@ -24,7 +24,7 @@ enum ROLE {
 model product {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  description String[]
+  description String
   images      String[]
   colors      Color[]
   price       Int

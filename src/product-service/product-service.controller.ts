@@ -72,6 +72,9 @@ export class ProductServiceController {
             name: { contains: query, mode: 'insensitive' },
           },
           {
+            description: { contains: query, mode: 'insensitive' },
+          },
+          {
             bannerText: { contains: query, mode: 'insensitive' },
           },
           {
