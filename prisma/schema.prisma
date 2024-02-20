@@ -27,7 +27,7 @@ model product {
   name        String
   description String
   images      String[]
-  colors      Color[]
+  colors      String[]
   reviews reviews[]
   price       Int
   company     String
@@ -44,8 +44,6 @@ model Color {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   color     String   @unique
   name      String
-  product   product? @relation(fields: [productId], references: [id])
-  productId String?  @db.ObjectId
 }
 
 type Cart {

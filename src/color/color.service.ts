@@ -10,6 +10,15 @@ export class ColorService {
     return products.length >= 1 ? products : [];
   }
 
+  async getOne(id: string): Promise<Color> {
+    const products = await this.prsima.color.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return products;
+  }
+
   async addColor(data: any): Promise<Color> {
     if (!data) {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);

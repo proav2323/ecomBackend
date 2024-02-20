@@ -19,6 +19,11 @@ export class ColorController {
   async getAll() {
     return await this.colorService.getAllColors();
   }
+
+  @Get('/:id')
+  async getone(@Param('id') id: string) {
+    return await this.colorService.getOne(id);
+  }
   @UseGuards(AdminGuard)
   @Post('/add')
   async addColor(@Body() data) {

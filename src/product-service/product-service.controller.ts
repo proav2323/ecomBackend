@@ -8,7 +8,6 @@ export class ProductServiceController {
   async getAllProducts(): Promise<product[]> {
     const products = await this.prsima.product.findMany({
       include: {
-        colors: true,
         category: true,
       },
     });
@@ -20,7 +19,6 @@ export class ProductServiceController {
         id: id,
       },
       include: {
-        colors: true,
         category: true,
       },
     });
@@ -33,7 +31,6 @@ export class ProductServiceController {
         onBanner: true,
       },
       include: {
-        colors: true,
         category: true,
         reviews: {
           include: {
@@ -51,7 +48,6 @@ export class ProductServiceController {
         new: true,
       },
       include: {
-        colors: true,
         category: true,
         reviews: {
           include: {
@@ -67,7 +63,6 @@ export class ProductServiceController {
     const products = await this.prsima.product.findMany({
       where: query,
       include: {
-        colors: true,
         category: true,
         reviews: {
           include: {
@@ -101,7 +96,6 @@ export class ProductServiceController {
         ],
       },
       include: {
-        colors: true,
         category: true,
         reviews: {
           include: {
@@ -160,9 +154,7 @@ export class ProductServiceController {
         description: description,
         price: price,
         images: images,
-        colors: {
-          connect: colors.map((id: string) => ({ id: id })),
-        },
+        colors: colors,
         cta: onBanner ? cta : undefined,
         onBanner: onBanner,
         bannerText: onBanner ? bannerText : undefined,
