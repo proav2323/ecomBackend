@@ -135,7 +135,7 @@ export class ProductServiceController {
     if (
       !name ||
       !description ||
-      !price ||
+      price === 0 ||
       images.length <= 0 ||
       colors.length <= 0 ||
       !company ||
@@ -144,9 +144,9 @@ export class ProductServiceController {
       isNew === undefined ||
       isNew === null ||
       !categoryId ||
-      !stock
+      stock === 0
     ) {
-      throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
+      throw new HttpException('invalid dataaaa', HttpStatus.BAD_REQUEST);
     }
 
     if (onBanner === true && (!bannerText || !cta)) {
