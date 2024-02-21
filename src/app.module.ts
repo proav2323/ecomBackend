@@ -14,6 +14,8 @@ import { CategoryService } from './category/category.service';
 import { OrderController } from './order/order.controller';
 import { OrderService } from './order/order.service';
 import { JwtModule } from '@nestjs/jwt';
+import { ReviewsController } from './reviews/reviews.controller';
+import { ReviewsService } from './reviews/reviews.service';
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { JwtModule } from '@nestjs/jwt';
     ColorController,
     CategoryController,
     OrderController,
+    ReviewsController,
   ],
   providers: [
     AppService,
@@ -40,6 +43,7 @@ import { JwtModule } from '@nestjs/jwt';
     ColorService,
     CategoryService,
     OrderService,
+    ReviewsService,
   ],
 })
 export class AppModule {}
