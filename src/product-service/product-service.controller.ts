@@ -9,6 +9,11 @@ export class ProductServiceController {
     const products = await this.prsima.product.findMany({
       include: {
         category: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return products.length >= 1 ? products : [];
@@ -20,6 +25,11 @@ export class ProductServiceController {
       },
       include: {
         category: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return products;
