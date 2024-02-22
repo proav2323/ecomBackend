@@ -74,9 +74,9 @@ export class UserService {
     return user;
   }
   async signUp(body: any): Promise<{ token: string }> {
-    const { email, password, name } = body;
+    const { email, password, name, role } = body;
 
-    if (!email || !password || !name) {
+    if (!email || !password || !name || !role) {
       throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
     }
 
@@ -93,7 +93,7 @@ export class UserService {
         email: email,
         name: name,
         password: hashPassword,
-        role: email === 'anshvishesh03@gmail.com' ? ROLE.ADMIN : ROLE.USER,
+        role: role,
       },
     });
 
