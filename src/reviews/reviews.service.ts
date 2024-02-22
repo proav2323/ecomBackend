@@ -52,6 +52,17 @@ export class ReviewsService {
         productId: productId,
       },
     });
+
+    const product = await this.prisma.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        reviews: {
+          connect: { id: rev.id },
+        },
+      },
+    });
     return rev;
   }
 
@@ -75,13 +86,20 @@ export class ReviewsService {
     return rev;
   }
 
-  async delete(id: string, userId: string) {
-    const rev = await this.prisma.reviews.delete({
+  async delete(id: string, userId: string, productId: string) {
+    const product = await this.prisma.product.update({
       where: {
-        id: id,
-        userId: userId,
+        id: productId,
+      },
+      data: {
+        reviews: {
+          delete: {
+            id: id,
+            userId: userId,
+          },
+        },
       },
     });
-    return rev;
+    return product;
   }
 }
