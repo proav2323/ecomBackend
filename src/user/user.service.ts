@@ -30,6 +30,49 @@ export class UserService {
     });
     return user ? user : undefined;
   }
+
+  async getUserAll(): Promise<User[]> {
+    const user = await this.prisma.user.findMany();
+    return user.length >= 1 ? user : undefined;
+  }
+  async upadateAdmin(body: any, id: string): Promise<User> {
+    const { role } = body;
+
+    if (!role) {
+      throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
+    }
+
+    const user: User = await this.prisma.user.update({
+      data: {
+        role: role,
+      },
+      where: {
+        id: id,
+      },
+    });
+
+    return user;
+  }
+
+  async upadate(body: any, id: string): Promise<User> {
+    const { role, name } = body;
+
+    if (!role || !name) {
+      throw new HttpException('invalid data', HttpStatus.BAD_REQUEST);
+    }
+
+    const user: User = await this.prisma.user.update({
+      data: {
+        role: role,
+        name: name,
+      },
+      where: {
+        id: id,
+      },
+    });
+
+    return user;
+  }
   async signUp(body: any): Promise<{ token: string }> {
     const { email, password, name } = body;
 
