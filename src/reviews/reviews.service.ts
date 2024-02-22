@@ -44,6 +44,20 @@ export class ReviewsService {
       throw new HttpException('invalid', HttpStatus.BAD_REQUEST);
     }
 
+    const re = await this.prisma.reviews.findMany({
+      where: {
+        userId: userId,
+        productId: productId,
+      },
+    });
+
+    if (re.length >= 1) {
+      throw new HttpException(
+        "can't post two reviews on same product",
+        HttpStatus.CONFLICT,
+      );
+    }
+
     const rev = await this.prisma.reviews.create({
       data: {
         userId: userId,
