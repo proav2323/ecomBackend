@@ -21,9 +21,9 @@ export class AuthController {
   }
 
   @UseGuards(AdminGuard)
-  @Get('/')
-  getAll() {
-    return this.userService.getUserAll();
+  @Get('/admin/:email')
+  getAll(@Param('email') email: string) {
+    return this.userService.getUserAll(email);
   }
 
   @Get('/email/:email')

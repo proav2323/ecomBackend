@@ -31,8 +31,14 @@ export class UserService {
     return user ? user : undefined;
   }
 
-  async getUserAll(): Promise<User[]> {
-    const user = await this.prisma.user.findMany();
+  async getUserAll(email: string): Promise<User[]> {
+    const user = await this.prisma.user.findMany({
+      where: {
+        email: {
+          not: email,
+        },
+      },
+    });
     return user.length >= 1 ? user : undefined;
   }
   async upadateAdmin(body: any, id: string): Promise<User> {
