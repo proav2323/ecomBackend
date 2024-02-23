@@ -10,7 +10,7 @@ import {
 import { User } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { AdminGuard } from '../admin/admin.guard';
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
