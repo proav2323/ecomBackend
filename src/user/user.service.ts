@@ -60,6 +60,15 @@ export class UserService {
     return user;
   }
 
+  async delete(id: string) {
+    const product = await this.prisma.user.delete({
+      where: {
+        id: id,
+      },
+    });
+    return product;
+  }
+
   async upadate(body: any, id: string): Promise<User> {
     const { role, name } = body;
 

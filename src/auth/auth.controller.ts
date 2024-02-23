@@ -1,12 +1,12 @@
 import {
   Body,
-  Controller,
+  Controller, Delete,
   Get,
   Param,
   Post,
   Put,
-  UseGuards,
-} from '@nestjs/common';
+  UseGuards
+} from "@nestjs/common";
 import { User } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { AdminGuard } from '../admin/admin.guard';
@@ -24,6 +24,12 @@ export class AuthController {
   @Get('/admin/:email')
   getAll(@Param('email') email: string) {
     return this.userService.getUserAll(email);
+  }
+
+  @UseGuards(AdminGuard)
+  @Delete('/admin/delete/:id')
+  delete(@Param('id') email: string) {
+    return this.userService.delete(email);
   }
 
   @Get('/email/:email')
