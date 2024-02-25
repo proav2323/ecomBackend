@@ -21,7 +21,7 @@ export class ProductServiceController {
   async getProductsWithId(id: string): Promise<product> {
     const products = await this.prsima.product.findUnique({
       where: {
-        id: id,
+        id: String(id),
       },
       include: {
         category: true,
