@@ -53,7 +53,7 @@ export class ProductsController {
       query = {
         ...query,
         price: {
-          lte: price,
+          lte: Number(price),
         },
       };
     }
@@ -64,9 +64,7 @@ export class ProductsController {
       query = {
         ...query,
         colors: {
-          some: {
-            id: colorId,
-          },
+          has: colorId,
         },
       };
     }
