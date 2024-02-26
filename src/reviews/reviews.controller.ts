@@ -38,7 +38,11 @@ export class ReviewsController {
 
   @UseGuards(AuthGuard)
   @Delete('/delete/:id/:userId/:productId')
-  async delete(@Param('id') id: string, @Param('userId') userId: string, @Param('productId') productId: string) {
+  async delete(
+    @Param('id') id: string,
+    @Param('userId') userId: string,
+    @Param('productId') productId: string,
+  ) {
     return await this.revService.delete(id, userId, productId);
   }
 }
