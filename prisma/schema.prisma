@@ -73,7 +73,13 @@ model Order {
   expiry     String
   status Status
   orderAt DateTime @default(now())
+  address address
   // add google pay stuff here
+}
+
+type address {
+  road Int
+  number Int
 }
 
 enum Status {

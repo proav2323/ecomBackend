@@ -34,6 +34,7 @@ export class OrderService {
       nameOfCard,
       expiry,
       status,
+      address,
     } = data;
 
     if (
@@ -45,7 +46,8 @@ export class OrderService {
       !cvv ||
       !nameOfCard ||
       !expiry ||
-      !status
+      !status ||
+      !address
     ) {
       throw new HttpException('invalid data', HttpStatus.BAD_GATEWAY);
     }
@@ -62,6 +64,7 @@ export class OrderService {
         totalQty,
         totalPrice,
         status,
+        address: address,
       },
     });
     return order;
