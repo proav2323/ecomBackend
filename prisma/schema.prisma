@@ -78,7 +78,7 @@ model Order {
 }
 
 type address {
-  road Int
+  road String
   number Int
 }
 
