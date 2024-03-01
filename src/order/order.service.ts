@@ -35,6 +35,7 @@ export class OrderService {
       expiry,
       status,
       address,
+      userId,
     } = data;
 
     if (
@@ -47,14 +48,14 @@ export class OrderService {
       !nameOfCard ||
       !expiry ||
       !status ||
-      !address
+      !address ||
+      !userId
     ) {
       throw new HttpException('invalid data', HttpStatus.BAD_GATEWAY);
     }
-    const user = req['user'];
     const order = await this.prismaService.order.create({
       data: {
-        orderById: user.id,
+        orderById: userId,
         cvv: cvv,
         cart: cart,
         method,
