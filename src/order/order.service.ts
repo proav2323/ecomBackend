@@ -14,7 +14,11 @@ export class OrderService {
   }
 
   async getOrders() {
-    return await this.prismaService.order.findMany({});
+    return await this.prismaService.order.findMany({
+      include: {
+        orderBy: true,
+      }
+    });
   }
   async getOrdderWithId(id: string) {
     return await this.prismaService.order.findUnique({
