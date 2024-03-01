@@ -68,7 +68,7 @@ model Order {
   cart       Cart
   method     String
   cardNumber Int?
-  cvv        String?
+  cvv        Int?
   nameOfCard String?
   expiry     String
   status Status
