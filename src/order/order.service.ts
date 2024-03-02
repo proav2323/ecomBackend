@@ -10,6 +10,9 @@ export class OrderService {
       where: {
         orderById: userId,
       },
+            include: {
+        orderBy: true,
+      }
     });
   }
 
