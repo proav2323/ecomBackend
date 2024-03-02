@@ -27,7 +27,9 @@ export class OrderService {
     return await this.prismaService.order.findUnique({
       where: {
         id: id,
-      },
+      },       include: {
+        orderBy: true,
+      }
     });
   }
   async addOrder(data: any, req: Request) {
